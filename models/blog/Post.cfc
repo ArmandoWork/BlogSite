@@ -1,4 +1,4 @@
-component persistent="true"{
+component persistent="true" accessors="true"{
 	property name="id" column="idblog" fieldtype="id" generator="increment";
 	property name="title" ormtype="text";     
 	property name="Author" ormtype="text";

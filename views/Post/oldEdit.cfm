@@ -1,14 +1,14 @@
-<cfset blog = EntityLoad('Blog',url.id,true) />
+<cfset blog = EntityLoad('Post',url.id,true) />
 
 <cfparam name="form.submitedit" default="0"/>
-<cfparam name="form.Title" default="#blog.title#"/>
-<cfparam name="form.Author" default="#blog.Author#"/>
-<cfparam name="form.Content" default="#blog.Content#"/>
-<cfparam name="form.Category" default="#blog.Category#"/>
+<cfparam name="form.Title" default="#blog.gettitle()#"/>
+<cfparam name="form.Author" default="#blog.getAuthor()#"/>
+<cfparam name="form.Content" default="#blog.getContent()#"/>
+<cfparam name="form.Category" default="#blog.getCategory()#"/>
 
 <h1>Blog bearbeiten</h1><br>
 
-<cfform action="/index.cfm/myHandler/editBlog.cfm?id=#blog.id#">
+<cfform action="/index.cfm/myHandler/editBlog.cfm?id=#blog.getid()#">
 <table>
 	<tr>
 		<td style="padding: 5px 0 5px 0;"><label for="Title">Titel:</label></td>
@@ -30,7 +30,7 @@
 		<td style="padding: 5px 0 5px 0;"><cfinput name="submit" type="submit"/></td>
 	</tr>
 </table>
-<cfinput type="hidden" name="BlogID" value="#blog.id#">
+<cfinput type="hidden" name="BlogID" value="#blog.getid()#">
 <input type="hidden" name="submitedit" value="1" />
 </cfform>
 <cfscript>
@@ -48,4 +48,4 @@ if(form.submitedit)
 }
 </cfscript>
 <br>
-<cfoutput><a href="/index.cfm/myHandler/blogpost.cfm?id=#blog.id#">Zurück zu diesem Blog</a></cfoutput>
+<cfoutput><a href="/index.cfm/myHandler/blogpost.cfm?id=#blog.getid()#">Zurück zu diesem Blog</a></cfoutput>

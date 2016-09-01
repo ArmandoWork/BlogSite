@@ -91,12 +91,12 @@
 		};
 
 		//Register interceptors as an array, we need order
-		interceptors = [
+		/*interceptors = [
 			//SES
 			{class="coldbox.system.interceptors.SES",
 			 properties={}
 			}
-		];
+		];  */
 
 		/*
 		// flash scope configuration
