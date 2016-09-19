@@ -15,6 +15,7 @@ component{
 
 	function preHandler( event, rc, prc, action, eventArguments ){
 		variables.blogService = getModel('blog/blogService');
+		variables.commentService = getModel('comment/commentService');
 	}
 	
 	/**
@@ -53,6 +54,7 @@ component{
 
 	function view( event, rc, prc){
 		prc.post = variables.blogService.getpost(rc.id);
+		prc.comment = variables.commentService.getcomments(rc.id);
 		
 		event.setView("Post/view");
 	}
@@ -61,7 +63,7 @@ component{
 
     	variables.blogService.deletepost(rc.id);
 
-    	setNextEvent(event="post.index", queryString="msg=post deleted");
+    	setNextEvent(event="post.index", queryString="msg=post gelöscht");
 	}
 
 	function save( event, rc, prc){ 
@@ -77,6 +79,33 @@ component{
 			setNextEvent(event="post.index", queryString="msg=post hinzugefügt");
 			
 		}
+	}
+
+	function editC( event, rc, prc){;
+		prc.comment = variables.commentService.getcomment(rc.cid);
+		
+		event.setView("Post/editC");
+	}
+
+	function saveC(event, rc, prc){
+		<!---if(rc.cid)
+		{
+			variables.commentService.updatecomment(rc.cid, rc.cA, rc.CC);
+			setNextEvent(event="post.view&id=#rc.id#", queryString="msg=Comment bearbeitet");
+		}
+		else
+		{ --->
+			variables.commentService.addcomment(rc.cA, rc.CC, rc.id);
+			setNextEvent(event="post.view&id=#rc.id#", queryString="msg=Comment hinzugefügt");
+			
+		<!---}--->
+	}
+
+	function deleteC( event, rc, prc ){
+		//writeDump(rc); abort;
+    	variables.commentService.deletecomment(rc.id);
+
+    	setNextEvent(event="post.view&id=#rc.id2#", queryString="msg=Comment gelöscht");
 	}
 
 }

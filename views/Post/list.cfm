@@ -1,6 +1,6 @@
 <h1>Blog</h1>
 <cfif not isNull(rc.msg)>
-<cfoutput><p style="font-color: red;">#rc.msg#</p></cfoutput>
+<cfoutput><p style="color: red;">#rc.msg#</p></cfoutput>
 </cfif>
 
 <cfoutput query="prc.posts">

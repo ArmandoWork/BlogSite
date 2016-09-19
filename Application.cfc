@@ -9,12 +9,7 @@ component{
 	this.sessionManagement = true;
 	this.sessionTimeout = createTimeSpan(0,0,30,0);
 	this.setClientCookies = true;
-	this.datasources["mywebsite"] = {
-	  class: 'org.gjt.mm.mysql.Driver'
-	, connectionString: 'jdbc:mysql://localhost:3306/mywebsite?useUnicode=true&characterEncoding=UTF-8&useLegacyDatetimeCode=true'
-	, username: 'root'
-	, password: "encrypted:76e5a27fcc483cf8586c75a73c37029adc1f762f7097a123"
-	};
+	this.datasource = "mywebsite";
 	this.ormEnabled= true;
 	this.ormSettings = { logsql = true, dbcreate="update", cfclocation="/models" };
 
