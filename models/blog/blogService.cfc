@@ -18,36 +18,38 @@ component accessors="false"{
 	{
 		if(arguments.postid gt 0)
 		{
-		var myQuery = queryExecute(
-			"SELECT * from blog
-			where idblog = #arguments.postid#" 
-			 
-			);
+			var myPost = entityLoadByPK("Post", arguments.postid);
 		} else
 		{
-			var myQuery = queryNew("idblog, title, Author, Content, Category, dateposted, blogpostid")
-			queryAddRow(myQuery, 1);
-			querySetCell(myQuery, "idblog", 0);
-			querySetCell(myQuery, "title", "");
-			querySetCell(myQuery, "Author", "");
-			querySetCell(myQuery, "Content", "");
-			querySetCell(myQuery, "Category", "");
-			querySetCell(myQuery, "dateposted", "");
-			querySetCell(myQuery, "blogpostid", 0); 
+			var myPost = entityNew("Post"); 
 		}
-		return myquery;
-
+		return myPost;
 	}
 
 	function getposts ()
 	{
-		var myQuery = queryExecute(
-			"SELECT * from blog" 
-			 
-			);
-		return myquery;
+		var myPost = entityLoad("Post");
+		return myPost;
 	}
 	
+	function deletepost(id)
+	{
+		p = getpost(id);
+		entityDelete(p);
+	}
+
+	function save(data)
+	{
+		//writedump(data);abort;
+		p = getpost(data.id);
+		p.setContent(data.Content);
+		p.setAuthor(data.Author);
+		p.settitle(data.title);
+		p.setCategory(data.Category);
+		p.setdateposted(now());
+		entitySave(p);
+	}
+	<!---
 	function addpost(T, A, Co, Cat)
 	{
 		//writeDump(arguments);abort;
@@ -56,14 +58,29 @@ component accessors="false"{
 			'INSERT INTO blog(title, Author, Content, Category, dateposted, blogpostid) VALUES ("#arguments.T#", "#arguments.A#", "#arguments.Co#", "#arguments.Cat#", now(), 0) ');
 	}
 
-	function deletepost(BID)
-	{
-		var myQuery = queryExecute('DELETE FROM blog WHERE idblog="#arguments.BID#"');
-	}
-
 	function updatepost(BID, T, A, Co, Cat)
 	{
 		var myQuery = queryExecute(
 			'update blog set title = "#arguments.T#", Author = "#arguments.A#", Content = "#arguments.Co#", Category = "#arguments.Cat#" where idblog = #arguments.BID#')
+	}
+	--->
+
+
+	<!---- COMMENTS ----->
+
+	function addcomment(data){
+		
+		//writeDump(data); abort;
+		p = getpost(data.Postid);
+		var c = entityNew('Comment');
+		c.setComment(data.CC);
+		c.setAuthor(data.CA);
+		c.setdateposted(now());
+		entitySave(c);
+		//writeDump(c);
+		p.addComment(c);
+		entitySave(p);
+		ORMFlush();
+		//writedump(p);abort;
 	}
 }

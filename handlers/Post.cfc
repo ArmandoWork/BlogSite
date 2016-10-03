@@ -41,8 +41,8 @@ component{
     */
     function index( event, rc, prc ){
     	prc.posts = variables.blogService.getposts();
-    	
-    	//writeDump(posts);abort;
+
+    	//writeDump(prc.posts);abort;
 		event.setView( "Post/list" );
 	}
 
@@ -68,14 +68,14 @@ component{
 
 	function save( event, rc, prc){ 
 		//writeDump(rc);abort;
-		if(rc.id)
+		variables.blogService.save(rc);
+
+		if(val(rc.id))
 		{
-			variables.blogService.updatepost(rc.id, rc.title, rc.Author, rc.Content, rc.Category);
 			setNextEvent(event="post.index", queryString="msg=post bearbeitet");
 		}
 		else
 		{
-			variables.blogService.addpost(rc.title, rc.Author, rc.Content, rc.Category);
 			setNextEvent(event="post.index", queryString="msg=post hinzugefügt");
 			
 		}
@@ -95,8 +95,9 @@ component{
 		}
 		else
 		{ --->
-			variables.commentService.addcomment(rc.cA, rc.CC, rc.id);
-			setNextEvent(event="post.view&id=#rc.id#", queryString="msg=Comment hinzugefügt");
+
+			variables.blogService.addcomment(rc);
+			setNextEvent(event="post.view&id=#rc.Postid#", queryString="msg=Comment hinzugefügt");
 			
 		<!---}--->
 	}

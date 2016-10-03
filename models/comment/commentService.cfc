@@ -10,12 +10,8 @@ function getcomment(cid){
 }
 
 function getcomments(postid){
-	var myQuery = queryExecute(
-			"SELECT * FROM comment
-			WHERE postid = #arguments.postid#" 
-			);
-
-	return myQuery;
+	var c = entityLoad('Comment');
+	
 }
 
 function addcomment(A, CC, postid){

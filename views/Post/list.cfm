@@ -3,22 +3,22 @@
 <cfoutput><p style="color: red;">#rc.msg#</p></cfoutput>
 </cfif>
 
-<cfoutput query="prc.posts">
-
+<cfoutput>
+	<cfloop array="#prc.posts#" index="post">
 	<div>
 		<div>
-			<h2><a href="index.cfm?event=post.view&id=#prc.posts.idblog#">#prc.posts.title#</a></h2>
-			<p>#prc.posts.Author#  #dateformat(prc.posts.dateposted, 'dd-mm-yyyy')#</p>
+			<h2><a href="index.cfm?event=post.view&id=#post.getid()#">#post.gettitle()#</a></h2>
+			<p>#post.getAuthor()#  #dateformat(post.getdateposted(), 'dd-mm-yyyy')#</p>
 		</div>
 		<div>
-			<p>#left(prc.posts.Content, 50)# <a href="index.cfm?event=post.view&id=#prc.posts.idblog#">...</a></p>
+			<p>#left(post.getContent(), 50)# <a href="index.cfm?event=post.view&id=#post.getid()#">...</a></p>
 		</div>
 		<div>
-			<p><a href="##">#prc.posts.Category#</a></p>
-			<a href="/index.cfm?event=post.delete&id=#prc.posts.idblog#">Blog löschen</a>
+			<p><a href="##">#post.getCategory()#</a></p>
+			<a href="/index.cfm?event=post.delete&id=#post.getid()#">Blog löschen</a>
 		</div>
 	</div>
-
+	</cfloop>
 </cfoutput>
 
 <a href="/index.cfm?event=post.edit">Blog hinzufügen</a>

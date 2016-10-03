@@ -1,15 +1,15 @@
-<cfoutput query="prc.post">
+<cfoutput>
 	<div>
-		<h2>#prc.post.title#</h2>
-		<p>#prc.post.Author#  #dateformat(prc.post.dateposted, 'dd-mm-yyyy')#</p>
+		<h2>#prc.post.gettitle()#</h2>
+		<p>#prc.post.getAuthor()#  #dateformat(prc.post.getdateposted(), 'dd-mm-yyyy')#</p>
 	</div>
 	<div>
-		<p>#replace(prc.post.Content, chr(10), '<br>', 'all')#</p>
+		<p>#replace(prc.post.getContent(), chr(10), '<br>', 'all')#</p>
 	</div>
 	<div>
-		<p><a href="##">#prc.post.Category#</a></p>
+		<p><a href="##">#prc.post.getCategory()#</a></p>
 		<a href="/index.cfm?event=post">Zurück zu dem Blog</a>
-		<a href="/index.cfm?event=post.edit&id=#prc.post.idblog#">Diesen Blog bearbeiten</a>
+		<a href="/index.cfm?event=post.edit&id=#prc.post.getid()#">Diesen Blog bearbeiten</a>
 	</div>
 	<br>
 </cfoutput>
@@ -29,7 +29,7 @@
 				<td style="padding: 5px 0 5px 0;"><cfinput name="submit" type="submit"/></td>
 			</tr>
 		</table>
-		<cfinput type="hidden" name="id" value="#prc.post.idblog#" />
+		<cfinput type="hidden" name="Postid" value="#prc.post.getid()#" />
 	</cfform>
 </div>
 <div>
@@ -37,16 +37,19 @@
 	<cfif not isNull(rc.msg)>
 		<cfoutput><p style="color: red;">#rc.msg#</p></cfoutput>
 	</cfif>
-	<cfoutput query="prc.comment">
+	<cfoutput>
+	<cfdump var="#prc.post.getComments()#"><cfabort>
+	<cfloop array="#prc.post.getComments()#" index="comment">
 		<div>
-			<h3>#prc.comment.commentauthor#  <!---#dateformat(prc.comment.dateposted, 'dd-mm-yyyy')#---></h3>
+			<h3>#comment.getAuthor()# #dateformat(comment.getdateposted(), 'dd-mm-yyyy')#</h3>
 		</div>
 		<div>
-			<p>#replace(prc.comment.comment, chr(10), '<br>', 'all')#</p>
+			<p>#replace(comment.getComment(), chr(10), '<br>', 'all')#</p>
 		</div>
 		<div>
-			<a href="/index.cfm?event=post.deleteC&id=#prc.comment.id#&id2=#prc.post.idblog#">Comment löschen</a>
+			<a href="/index.cfm?event=post.deleteC&id=#comment.getCommentid()#&Postid=#prc.post.getid()#">Comment löschen</a>
 		</div>
+	</cfloop>
 	</cfoutput>
 </div>
 
