@@ -36,6 +36,9 @@ component{
 
 	// request start
 	public boolean function onRequestStart( string targetPage ){
+		if(structKeyExists(url,'ormReload'))
+			ormReload();
+			
 		// Process ColdBox Request
 		application.cbBootstrap.onRequestStart( arguments.targetPage );
 
