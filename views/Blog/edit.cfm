@@ -14,10 +14,10 @@
 	</tr>
 	<tr>
 		<td style="padding: 5px 0 5px 0;"><label for="Author">Author*:</label></td>
-		<td style="padding: 5px 0 5px 0;"><cfinput name="Author" type="text" value="#prc.post.getAuthor()#"required="true"/></td>
+		<td style="padding: 5px 0 5px 0;"><cfselect name="Author" required="true" query="prc.qAuthors" value="Authorid" display="AuthorName"/></td>
 	</tr>
 	<tr>
-		<td style="padding: 5px 0 5px 0;"><label for="Content">Content*:</label></td>
+		<td style="padding: 5px 0 5px 0; vertical-align: top;"><label for="Content">Content*:</label></td>
 		<cfoutput><td style="padding: 5px 0 5px 0;"><textarea cols="150" rows="20" name="Content" required>#prc.post.getContent()#</textarea></td></cfoutput>
 	</tr>
 	<tr>

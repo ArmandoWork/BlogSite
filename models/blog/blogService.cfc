@@ -43,7 +43,7 @@ component accessors="false"{
 		//writedump(data);abort;
 		p = getpost(data.id);
 		p.setContent(data.Content);
-		p.setAuthor(data.Author);
+		p.setAuthor(getAuthor(data.Author));
 		p.settitle(data.title);
 		p.setCategory(data.Category);
 		p.setdateposted(now());
@@ -58,7 +58,7 @@ component accessors="false"{
 		p = getpost(val(data.Postid));
 		var c = entityNew('Comment');
 		c.setComment(data.CC);
-		c.setAuthor(data.CA);
+		c.setUser(data.CU);
 		c.setdateposted(now());
 		entitySave(c);
 		//writeDump(c);
@@ -74,5 +74,17 @@ component accessors="false"{
 			entityDelete(c);
 			ORMFlush();
 		}
+	}
+
+	<!--- Authors --->
+
+	function getAuthors(){
+		var myAuthor = entityLoad("Author");
+		return myAuthor;
+	}
+
+	function getAuthor(id){
+		var a = entityLoadByPK("Author",arguments.id);
+		return a;
 	}
 }

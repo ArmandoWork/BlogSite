@@ -1,7 +1,7 @@
 <cfoutput>
 	<div>
 		<h2>#prc.post.gettitle()#</h2>
-		<p>#prc.post.getAuthor()#  #dateformat(prc.post.getdateposted(), 'dd-mm-yyyy')#</p>
+		<p>#prc.post.getAuthor().getAuthorName()#  #dateformat(prc.post.getdateposted(), 'dd-mm-yyyy')#</p>
 	</div>
 	<div>
 		<p>#replace(prc.post.getContent(), chr(10), '<br>', 'all')#</p>
@@ -18,8 +18,8 @@
 	<cfform action="/index.cfm?event=blog.addComment">
 		<table>
 			<tr>
-				<td style="padding: 5px 0 5px 0;"><label for="CA">Name*:</label></td>
-				<td style="padding: 5px 0 5px 0;"><cfinput name="cA" type="text" required="true"/></td>
+				<td style="padding: 5px 0 5px 0;"><label for="CU">Name*:</label></td>
+				<td style="padding: 5px 0 5px 0;"><cfinput name="cU" type="text" required="true"/></td>
 			</tr>
 			<tr>
 				<td style="padding: 5px 0 5px 0;"><label for="CC">Comment*:</label></td>
@@ -41,7 +41,7 @@
 
 	<cfloop array="#prc.post.getComments()#" index="comment">
 		<div>
-			<h3>#comment.getAuthor()# </h3>
+			<h3>#comment.getUser()# </h3>
 			<h6>#dateformat(comment.getdateposted(), 'dd-mm-yyyy')# #timeformat(comment.getdateposted(), 'hh:mm:ss')#
 		</div>
 		<div>

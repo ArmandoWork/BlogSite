@@ -8,7 +8,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<h2><a href="index.cfm?event=blog.view&id=#post.getid()#">#post.gettitle()#</a></h2>
-			<p>#post.getAuthor()#  #dateformat(post.getdateposted(), 'dd-mm-yyyy')#</p>
+			<p>#post.getAuthor().getAuthorName()#  #dateformat(post.getdateposted(), 'dd-mm-yyyy')#</p>
 		</div>
 		<div class="col-md-12">
 			<p>#left(post.getContent(), 50)# <a href="index.cfm?event=blog.view&id=#post.getid()#">...</a></p>

@@ -15,6 +15,8 @@ component{
 
 	function edit( event, rc, prc){
 		prc.post = variables.blogService.getpost(event.getvalue('id', 0));
+		prc.qAuthors = Entitytoquery(variables.blogService.getAuthors());
+		//dump(prc);abort;
 		event.setView("blog/edit");
 	}
 
@@ -25,12 +27,12 @@ component{
 
 	function addComment(event, rc, prc){
 		variables.blogService.addComment(rc);
-		setNextEvent(event="blog.view", queryString="id=#val(rc.postid)#");
+		setNextEvent(event="blog.view", queryString="id=#val(rc.postid)#&msg=Comment hinzugefügt");
 	}
 
 	function removeComment(event, rc, prc){
 		variables.blogService.removeComment(rc.commentid);
-		setNextEvent(event="blog.view", queryString="id=#val(rc.postid)#");
+		setNextEvent(event="blog.view", queryString="id=#val(rc.postid)#&msg=Comment gelöscht");
 	}
 
 	function delete( event, rc, prc ){
@@ -42,7 +44,8 @@ component{
 		variables.blogService.save(rc);
 		if(val(rc.id))
 		{
-			setNextEvent(event="blog.index", queryString="msg=post bearbeitet");
+			setNextEve
+			t(event="blog.index", queryString="msg=post bearbeitet");
 		}
 		else
 		{
@@ -50,4 +53,6 @@ component{
 			
 		}
 	}
+
+
 }

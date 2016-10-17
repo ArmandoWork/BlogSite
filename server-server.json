@@ -1,3 +1,6 @@
 {
-    "name":"server"
+    "name":"server",
+    "app":{
+        "cfengine":"Lucee@5.1.0-beta.2+031"
+    }
 }
