@@ -49,29 +49,13 @@ component accessors="false"{
 		p.setdateposted(now());
 		entitySave(p);
 	}
-	<!---
-	function addpost(T, A, Co, Cat)
-	{
-		//writeDump(arguments);abort;
-
-		var myQuery = queryExecute(
-			'INSERT INTO blog(title, Author, Content, Category, dateposted, blogpostid) VALUES ("#arguments.T#", "#arguments.A#", "#arguments.Co#", "#arguments.Cat#", now(), 0) ');
-	}
-
-	function updatepost(BID, T, A, Co, Cat)
-	{
-		var myQuery = queryExecute(
-			'update blog set title = "#arguments.T#", Author = "#arguments.A#", Content = "#arguments.Co#", Category = "#arguments.Cat#" where idblog = #arguments.BID#')
-	}
-	--->
-
-
+	
 	<!---- COMMENTS ----->
 
 	function addcomment(data){
 		
 		//writeDump(data); abort;
-		p = getpost(data.Postid);
+		p = getpost(val(data.Postid));
 		var c = entityNew('Comment');
 		c.setComment(data.CC);
 		c.setAuthor(data.CA);
@@ -82,5 +66,13 @@ component accessors="false"{
 		entitySave(p);
 		ORMFlush();
 		//writedump(p);abort;
+	}
+
+	function removecomment(commentid){
+		var c = entityLoadByPK('Comment',arguments.commentID);
+		if(!isNull(c)){
+			entityDelete(c);
+			ORMFlush();
+		}
 	}
 }

@@ -6,7 +6,7 @@
 	</cfif>
 </cfoutput>
 
-<cfform action="/index.cfm?event=post.save">
+<cfform action="/index.cfm?event=blog.save">
 <table>
 	<tr>
 		<td style="padding: 5px 0 5px 0;"><label for="Title">Titel*:</label></td>
@@ -31,6 +31,6 @@
 <cfinput type="hidden" name="id" value="#prc.post.getid()#" />
 </cfform>
 <br>
-<a href="/index.cfm?event=post">Zurück zu dem Blog</a>
+<a href="/index.cfm?event=blog">Zurück zu dem Blog</a>
 
 

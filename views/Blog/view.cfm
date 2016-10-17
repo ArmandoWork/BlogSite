@@ -8,14 +8,14 @@
 	</div>
 	<div>
 		<p><a href="##">#prc.post.getCategory()#</a></p>
-		<a href="/index.cfm?event=post">Zurück zu dem Blog</a>
-		<a href="/index.cfm?event=post.edit&id=#prc.post.getid()#">Diesen Blog bearbeiten</a>
+		<a href="/index.cfm?event=blog">Zurück zu dem Blog</a>
+		<a href="/index.cfm?event=blog.edit&id=#prc.post.getid()#">Diesen Blog bearbeiten</a>
 	</div>
 	<br>
 </cfoutput>
 <div>
 	<h4>Add a Comment:</h4>
-	<cfform action="/index.cfm?event=post.saveC">
+	<cfform action="/index.cfm?event=blog.addComment">
 		<table>
 			<tr>
 				<td style="padding: 5px 0 5px 0;"><label for="CA">Name*:</label></td>
@@ -38,16 +38,17 @@
 		<cfoutput><p style="color: red;">#rc.msg#</p></cfoutput>
 	</cfif>
 	<cfoutput>
-	<cfdump var="#prc.post.getComments()#"><cfabort>
+
 	<cfloop array="#prc.post.getComments()#" index="comment">
 		<div>
-			<h3>#comment.getAuthor()# #dateformat(comment.getdateposted(), 'dd-mm-yyyy')#</h3>
+			<h3>#comment.getAuthor()# </h3>
+			<h6>#dateformat(comment.getdateposted(), 'dd-mm-yyyy')# #timeformat(comment.getdateposted(), 'hh:mm:ss')#
 		</div>
 		<div>
 			<p>#replace(comment.getComment(), chr(10), '<br>', 'all')#</p>
 		</div>
 		<div>
-			<a href="/index.cfm?event=post.deleteC&id=#comment.getCommentid()#&Postid=#prc.post.getid()#">Comment löschen</a>
+			<a href="/index.cfm?event=blog.removeComment&commentid=#comment.getCommentid()#&postid=#prc.post.getid()#">Kommentar löschen</a>
 		</div>
 	</cfloop>
 	</cfoutput>
